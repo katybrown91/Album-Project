@@ -1,0 +1,23 @@
+{
+  "name": "mern-boilerplate",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..",
+    "start": "echo --- start --- && cd server && npm start",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run start",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cloudinary": "^1.14.0",
+    "commentbox.io": "^2.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
