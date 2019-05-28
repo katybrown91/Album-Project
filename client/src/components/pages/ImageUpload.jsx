@@ -4,6 +4,7 @@ import Axios from 'axios';
 import "../../index.scss";
 import { Route, Link, Switch } from 'react-router-dom';
 import Newsfeed from '../pages/Newsfeed';
+import AlbumDetails from '../pages/AlbumDetails';
 //import Picture from '../../../../server/models/'
 // import { Cloudinary } from ''
 
@@ -90,10 +91,10 @@ class ImageUpload extends Component {
       <br></br>
         <br></br>
         <br></br>
-        <Link to="/newsfeed">Added to Newsfeed!</Link>
+       {/*} <Link to="/newsfeed">Added to Newsfeed!</Link> */}
 
         <Switch>
-        <Route path="/newsfeed" component={Newsfeed} /> 
+        <Route path="/albumDetails:id" component={AlbumDetails} /> 
         </Switch>
       </div>
     );

@@ -37,7 +37,7 @@ export default class Albums extends Component {
 
   showAlbums = () => {
     return this.state.albums.map((eachAlbum,i)=>{
-      return <li key={i}> { eachAlbum.title  } 
+      return <li key={i}> { eachAlbum.title} 
               <Link to={`albumDetails/${eachAlbum._id}`}>Details</Link>
             </li>
     })
@@ -51,15 +51,38 @@ export default class Albums extends Component {
       this.props.history.push(`album/${album.response._id}`)
     })
   }
+  onRemoveItem = id => {
+    this.setState(state => {
+      const albumList = state.albumList.filter(item => item.id !== id);
+
+      return {
+        albumList,
+      };
+    });
+  };
   render() {
     return (
       <div className="Albums">
         {this.state.album}
         <form onSubmit={this.makeNewAlbum}>
           <input type="text" onChange={this.settingAlbum}  name="name"/>
+         
           <button >Create An Album</button>
         </form>
         {this.showAlbums()}
+        
+        <ul>
+          {this.state.albumList.map(item => (
+            <li key={item.id}>
+              <button
+                type="button"
+                onClick={() => this.onRemoveItem(item.id)}
+              >
+                Remove
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

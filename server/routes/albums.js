@@ -97,6 +97,12 @@ router.get("/viewAlbums", isLoggedIn, (req, res, next) =>{
 })
 
 
+router.get("/viewAlbumDetails/:id", isLoggedIn, (req, res, next) =>{
+  //console.log("view albums", req.user)
+  Album.findById(req.params.id).then(AlbumDetails=>{
+    res.json({AlbumDetails})
+  })
+})
 
 //http://localhost:5000/api/newalbum
 

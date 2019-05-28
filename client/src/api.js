@@ -135,7 +135,12 @@ export default {
       .get('/viewAlbums')
       .then(res => res.data)
       .catch(errHandler)    
-
   },
-
+  getMyAlbumDetails(id){
+    console.log("the details")
+    return service
+      .get(`/viewAlbumDetails/${id}`)
+      .then(res => res.data)
+      .catch(errHandler)    
+  }
 }
