@@ -72,10 +72,10 @@ export default class Albums extends Component {
         </form>
         {this.showAlbums()}
         
-        <button type="button"
+       {/* <button type="button"
         onClick={() => 
         this.onRemoveItem(albums._id)}>Delete</button> 
-           
+        */}
       </div>
     );
   }
