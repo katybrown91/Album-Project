@@ -33,7 +33,7 @@ export default class App extends Component {
           {api.isLoggedIn() &&<NavLink to="/newsfeed">Newsfeed</NavLink>}
           {api.isLoggedIn() &&<NavLink to="/imageUpload">Upload Photo</NavLink>}
           {api.isLoggedIn() &&<NavLink to="/albums">Add Albums</NavLink>}
-          {api.isLoggedIn() &&<NavLink to="/albumDetails">View Albums</NavLink>}
+          {/*{api.isLoggedIn() &&<NavLink to="/albumDetails">View Albums</NavLink>} */}
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
           {api.isLoggedIn() &&<NavLink to="/profile">Profile</NavLink>}

@@ -1,5 +1,6 @@
 const express = require('express');
-const Picture = require('../models/Picture')
+const Picture = require('../models/Picture');
+const Album = require('../models/Album');
 
 const router = express.Router();
 
@@ -26,5 +27,23 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+
+// save new picture and then add it to the album it belongs to
+router.post('/getPics/:albumId', (req, res, next) => {
+  console.log("the info prior to adding the picture to album ------------ ", req.body);
+    Album.findById(req.params.albumId).populate('pictures')
+    .then(theAlbum => {
+      console.log("show me the album >>>>>>>>> ", theAlbum);
+      res.json({
+        success: true,
+        theAlbum
+      });
+    })
+    .catch(err => {
+      res.status(400).json(err)
+        })
+});
+
 
 module.exports = router;

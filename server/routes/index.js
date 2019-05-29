@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/User')
 const parser = require('../configs/Cloudinary')
 const Picture = require('../models/Picture')
+const Album = require('../models/Album');
 
 router.get('/profile', isLoggedIn, (req, res, next) => {
   res.json({
@@ -28,7 +29,7 @@ router.post('/first-user/pictures', parser.single('picture'), (req, res, next) =
   Picture.create( { imageURL: req.file.url }).then(result=>{
     console.log('saved pic',result)
     res.json({saved:result})
-  }).catch(err=>console.error(err)) 
+  }).catch(err=>res.status(400).json(err)) 
 });
 
 
@@ -39,11 +40,41 @@ router.post('/updatePhoto', (req, res, next) => {
     thePic.description = req.body.description
     thePic.save()
     .then(updatedPic => {
-      res.json({thePhoto: updatedPic})
+      Album.findById(req.body.albumId)
+      .then(theAlbum => {
+        theAlbum.pictures.push(updatedPic._id)
+        theAlbum.save()
+        .then(updatedAlbum => {
+          Album.findById(req.body.albumId).populate('pictures')
+          .then(updatedPopulatedAlbum => {
+            console.log("this is the info for the updated album >>>>>>>---------- ", updatedAlbum);
+            // res.json({thePhoto: updatedPic})
+            res.status(200).json(updatedPopulatedAlbum);
+          })
+          .catch(err => {
+            console.log("the error while updating the pic 1 >>>>>>>>>>>>>>> ", err);
+            res.status(400).json(err)
+          })
+        })
+        .catch(err => {
+          console.log("the error while updating the pic 1 >>>>>>>>>>>>>>> ", err);
+          res.status(400).json(err)
+        })
+      })
+      .catch(err => {
+        console.log("the error while updating the pic 1.5 >>>>>>>>>>>>>>> ", err);
+        res.status(400).json(err)
+      })
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log("the error while updating the pic 2 >>>>>>>>>>>>>>> ", err);
+      res.status(400).json(err)
+    })
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log("the error while updating the pic 3 >>>>>>>>>>>>>>> ", err);
+    res.status(400).json(err)
+  })
 })
 
 

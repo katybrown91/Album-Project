@@ -6,7 +6,7 @@ const service = axios.create({
 })
 
 const errHandler = err => {
-  console.error(err)
+  console.error(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> THE ERROR >>>>>>>>>>>>>>>>>>>>>>>>>> ", err)
   if (err.response && err.response.data) {
     console.error("API response", err.response.data)
     throw err.response.data.message
@@ -100,8 +100,11 @@ export default {
         console.log("the res.data after file upload -------------- ", res.data)
         items.imageInfo = res.data.saved
         return this.updatePic(items)
-      })
-      .catch(errHandler)
+        // .then(updatedPic => {
+        //   items.imageInfo = updatedPic
+        //   return this.addPicToAlbum(items)
+        // }).catch(errHandler)
+      }).catch(errHandler)
   },
 
   updatePic(info) {
@@ -112,12 +115,12 @@ export default {
     .catch(errHandler)
   },
 
-  getPics(){
+  getPics(theAlbumId){
     /*    Axios.get('http://localhost:5000/api/pictures').then(allYourPics=>{
       console.log(allYourPics)
     })*/
     return service
-      .get('/pictures')
+      .get(`/pictures/getPics/${theAlbumId}`)
       .then(res => res.data)
       .catch(errHandler)    
 
@@ -142,5 +145,16 @@ export default {
       .get(`/viewAlbumDetails/${id}`)
       .then(res => res.data)
       .catch(errHandler)    
-  }
+  },
+
+  // addPicToAlbum(infoToAdd) {
+  //   console.log("the album id --------- ", infoToAdd)
+  //   return service
+  //   .post(`/pictures/add/${infoToAdd.albumId}`, infoToAdd)
+  //   .then(res => {
+  //     console.log("the updated album info >>>>>>>>>>>>>>>>>> ", res.data)
+  //     return res.data
+  //   })
+  //   .catch(errHandler)  
+  // }
 }
