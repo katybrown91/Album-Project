@@ -30,17 +30,16 @@ export default class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Hello!</h1>
           <NavLink to="/" exact>Login</NavLink>
-          {api.isLoggedIn() &&<NavLink to="/newsfeed">Newsfeed</NavLink>}
-          {api.isLoggedIn() &&<NavLink to="/imageUpload">Upload Photo</NavLink>}
-          {api.isLoggedIn() &&<NavLink to="/albums">Add Albums</NavLink>}
+          {api.isLoggedIn() &&<NavLink to="/newsfeed">My Albums</NavLink>}
+          {/*{api.isLoggedIn() &&<NavLink to="/imageUpload">Upload Photo</NavLink>} */}
+          {api.isLoggedIn() &&<NavLink to="/albums">Create an Album</NavLink>}
           {/*{api.isLoggedIn() &&<NavLink to="/albumDetails">View Albums</NavLink>} */}
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
           {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-          {api.isLoggedIn() &&<NavLink to="/profile">Profile</NavLink>}
+          {/*{api.isLoggedIn() &&<NavLink to="/profile">Profile</NavLink>} */}
         </header>
         <Switch>
           <Route path="/" exact component={Home} />
-          {/* <Route path="/countries" component={Countries} /> */}
           <Route path="/newsfeed" component={Newsfeed} /> 
           <Route path="/ImageUpload" component={ImageUpload}/>
           <Route path="/albums" component={Albums} />

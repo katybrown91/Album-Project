@@ -1,74 +1,74 @@
-import React, { Component } from 'react';
-import api from '../../api';
-import '../../index.scss'
+import React, { Component } from "react";
+import { Route, Link, NavLink, Switch } from "react-router-dom";
+import Axios from "axios";
+import api from "../../api";
 
-
-export default class Newsfeed extends Component {
+export default class Albums extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      newsfeed: []
-    }
+      title: String,
+      imageURL: String,
+      description: String,
+      album: String,
+      albums: []
+    };
   }
-
-  componentDidMount() {
-
-
-    api.getPics().then(pictures=>{
-      console.log(pictures)
-      
-      //add it to state && then loop throug it below.  map to show stuff 
-      this.setState({
-        pictures: pictures
-      })
+  componentDidMount(){
+    api.getMyAlbums().then(albums=>{
+      console.log("134124123421",albums)
+      this.setState({albums: albums.Albums})
     })
-
   }
 
-  showPictures() {
-    if(this.state.pictures) {
-      return this.state.pictures.map((picture, i) => {
-        console.log("the picture info ------ ", picture.imageURL)
-        if(picture.imageURL) {
-          return (
-            <div className="post">
-              <img key={i} src={picture.imageURL} />
-              <h4>{picture.description}</h4>
-            </div>
-          )
+  createAlbums() {
+    if (this.state.albums) {
+      return this.state.albums.map((album, i) => {
+        if (album.title) {
+          return <div className="Albums" />;
         }
-      })
-    } else {
-      return (
-        <h3>Nothing to show</h3>
-      )
+      });
     }
-    console.log("this is the state ------- ", this.state);
-    
-
-
-  
   }
+
+  settingAlbum = (e) => {
+    this.setState({album:e.target.value})
+  }
+
+  showAlbums = () => {
+    return this.state.albums.map((eachAlbum,i)=>{
+      return <li key={i}> { eachAlbum.title} 
+              <Link to={`albumDetails/${eachAlbum._id}`}>View Album</Link>
+            </li>
+    })
+  }
+
+  makeNewAlbum = (e) => {
+    e.preventDefault()
+    let newAlbum = {title: this.state.album}
+    api.saveAlbum(newAlbum).then(album=>{
+      console.log(album, this)
+      this.props.history.push(`album/${album.response._id}`)
+    })
+  }
+ onRemoveItem = id => {
+    this.setState(state => {
+      const album = state.album.filter(album=> album.id !== id);
+
+      return {
+        album,
+      };
+    });
+  }; 
+  
   render() {
     return (
-      <div className="Newsfeed">
-        <h2>Newsfeed</h2>
-
-        <div className="uploaded-images">
-        {this.showPictures()}
-        </div>
-        {/*this.state.picture.map(c => <li key={picture.imageUrl}>{picture.description}</li>)*/} 
+      <div className="Albums">
+        {this.state.album}
+        
+        {this.showAlbums()}
+        
       </div>
     );
   }
-  /*componentDidMount() {
-    api.getNewsfeed()
-      .then(newsfeed => {
-        console.log(newsfeed)
-        this.setState({
-          newsfeed: newsfeed
-        })
-      })
-      .catch(err => console.log(err))
-  } */
-} 
+}
