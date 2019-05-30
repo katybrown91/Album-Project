@@ -133,7 +133,9 @@ export default class AlbumDetails extends Component {
           <input type="text area" name="description" value={this.state.description} placeholder="description" onChange={(e)=>this.handleChange(e)} /> 
           <button type="submit">Upload</button>
         </form>
-      
+        <br></br>
+        <br></br>
+
       <div className= "album-pics">
       {this.showAlbumDetails}
         {this.showPictures()}

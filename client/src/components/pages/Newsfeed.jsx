@@ -97,7 +97,15 @@ export default class Albums extends Component {
         {this.state.album}
         
         {this.showAlbums()}
-
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="home-pics">
+        <img src={"./images/camera.jpg"} alt="camera" width="100vw" height="100vh"/> <br></br><br></br><br></br>
+        <img src={"./images/book.png"} alt="book" width="100vh" height="100vh" /> <br></br><br></br><br></br>
+        <img src={"./images/screens.png"} alt="screens" width="100vh" height="100vh" />
+</div>
         </div>
         
       </div>
