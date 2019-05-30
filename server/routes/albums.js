@@ -71,24 +71,33 @@ router.get('/details/:albumId', (req, res, next) => {
 
 
 
-router.post('/delete/:albumId', (req, res, next) => {
-  req.user.albums.pull(req.params.albumId);
-  req.user.save()
-  .then(updatedUser => {
-    Album.findByIdAndRemove(req.params.albumId)
-    .then(() => {
-      res.redirect(`/user/albums/${req.user.username}`);
+// router.delete('/delete/:albumId', (req, res, next) => {
+//   req.user.albums.pull(req.params.albumId);
+//   req.user.save()
+//   .then(updatedUser => {
+//     Album.findByIdAndRemove(req.params.albumId)
+//     .then(() => {
+//       res.redirect(`/user/albums/${req.user.username}`);
+//     })
+//     .catch(err => {
+//       next(err);
+//     });
+//   })
+//   .catch(err => {
+//     next(err);
+//   });
+// });
+
+router.delete('/delete/:albumId', (req, res, next) => {
+  Album.findByIdAndRemove(req.params.albumId)
+    .then((result) => {
+      //res.redirect(`/user/albums/${req.user.username}`);
+      res.json(result)
     })
     .catch(err => {
       next(err);
     });
-  })
-  .catch(err => {
-    next(err);
-  });
-});
-
-
+})
 router.get("/viewAlbums", isLoggedIn, (req, res, next) =>{
   //console.log("view albums", req.user)
   Album.find({userId:req.user._id}).then(Albums=>{
@@ -114,6 +123,29 @@ router.post('/newalbum', isLoggedIn, (req, res, next) => {
     res.json({response:response})
   })
 })
+
+/*router.delete('/albums/:id', isLoggedIn, function(req, res, next) => {
+
+  Album.findByIdAndRemove({_id: req.params.id}).then(function(Album))
+  res.send(Album)
+  
+  })  */
+
+  /*router.post("/delete-album/:id", isLoggedIn, (req, res, next)=>{
+    console.log("Bye", req.session.currentUser, req.params, req.params.id)
+    Album.findById(req.session.Album._id).then(Album=>{ //found myself and my friendList 
+      let index = Album.indexOf(req.params.id)
+      Album.splice(index,1)
+      Album.save(function(err){
+        if(!err){
+          res.redirect('back')
+        }
+      })
+    }).catch(err=>console.log(err))
+  }); */
+
+  
+
 
 module.exports = router
 

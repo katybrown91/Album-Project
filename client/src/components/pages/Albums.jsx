@@ -21,7 +21,8 @@ export default class Albums extends Component {
     })
   }
 
-  createAlbums() {
+  createAlbums(e) {
+    e.preventDefault()
     if (this.state.albums) {
       return this.state.albums.map((album, i) => {
         if (album.title) {
@@ -32,10 +33,12 @@ export default class Albums extends Component {
   }
 
   settingAlbum = (e) => {
+    e.preventDefault()
     this.setState({album:e.target.value})
   }
 
-  showAlbums = () => {
+  showAlbums = (e) => {
+    e.preventDefault()
     return this.state.albums.map((eachAlbum,i)=>{
       return <li key={i}> { eachAlbum.title} 
               <Link to={`albumDetails/${eachAlbum._id}`}>View Album</Link>
@@ -44,7 +47,7 @@ export default class Albums extends Component {
   }
 
   makeNewAlbum = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     let newAlbum = {title: this.state.album}
     api.saveAlbum(newAlbum).then(album=>{
       console.log(album, this)
@@ -71,10 +74,10 @@ export default class Albums extends Component {
           <button >Create An Album</button>
         </form>
 
-       {/* <button type="button"
+        <button type="button"
         onClick={() => 
-        this.onRemoveItem(albums._id)}>Delete</button> 
-        */}
+        this.onRemoveItem(this.state.album._id)}>Delete</button> 
+        
       </div>
     );
   }

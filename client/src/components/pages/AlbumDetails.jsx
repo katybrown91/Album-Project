@@ -13,6 +13,7 @@ export default class AlbumDetails extends Component {
       imageURL: [],
       description: '',
       album: null, 
+      pictures: [],
       // picture: null //test
       file: '',
     };
@@ -128,6 +129,9 @@ export default class AlbumDetails extends Component {
               <div className="post">
                 <img key={i} src={picture.imageURL} alt="your pic"/>
                 <h4>{picture.description}</h4>
+                <button type="button"
+        onClick={() =>
+        this.removePicture(picture, i)}>Delete</button>
               </div>
             )
           }
@@ -146,6 +150,19 @@ export default class AlbumDetails extends Component {
     // })
   }
 
+  removePicture(picture, index) {
+
+    console.log(picture, 9999 )
+    api.deletePicture(picture._id).then(res=>{
+      const album = {...this.state.album};
+      
+      album.pictures.splice(index, 1); //pull out specific index
+      this.setState({
+        album
+      })
+    })
+   
+  }
 
   
   
@@ -163,8 +180,14 @@ export default class AlbumDetails extends Component {
           <input type="text area" name="description" value={this.state.description} placeholder="description" onChange={(e)=>this.handleChange(e)} /> 
           <button type="submit">Upload</button>
         </form>
-      {/* conditional with album Id*/}
+      
+      <div className= "album-pics">
         {this.showPictures()}
+
+       {/*} <button type="button"
+        onClick={() => 
+        this.onRemoveItem(this.state.album._id)}>Delete</button> */}
+        </div> 
       
       </div>
       

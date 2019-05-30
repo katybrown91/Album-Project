@@ -46,4 +46,15 @@ router.post('/getPics/:albumId', (req, res, next) => {
 });
 
 
+router.delete('/deletePic/:pictureId', (req, res, next) => {
+  console.log("IN HERER", req.params )
+  Picture.findByIdAndRemove(req.params.pictureId)
+    .then((result) => {
+      res.json(result)
+    })
+    .catch(err => {
+      next(err);
+    });
+})
+
 module.exports = router;

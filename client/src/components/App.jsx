@@ -28,7 +28,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Hello!</h1>
+          <h1 className="App-title">Virtual Scrapbook</h1>
           <NavLink to="/" exact>Login</NavLink>
           {api.isLoggedIn() &&<NavLink to="/newsfeed">My Albums</NavLink>}
           {/*{api.isLoggedIn() &&<NavLink to="/imageUpload">Upload Photo</NavLink>} */}

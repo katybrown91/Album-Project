@@ -26,15 +26,14 @@ body {
 .App {
   text-align: center;
 
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
 
   .App-header {
-    background-color: $primary;
+    background-color: rgb(93, 167, 125);
     padding: 20px;
     color: white;
+    font-family: fantasy;
+
+    
 
     a {
       color: white;
@@ -71,6 +70,7 @@ body {
 .Home {
   p {
     font-size: 1.2em;
+    font-family: cursive;
   }
 }
 
@@ -84,9 +84,9 @@ body {
 }
 
 @media screen and (min-width: 601px) {
-  .post{
+  .album-pics{
     width: 300px;
-    border: solid 10px 10px 20px 20px #32c3ff;
+    border: solid 10px 10px 20px 20px rgb(93, 167, 125);
     }
 }
 
@@ -99,21 +99,30 @@ body {
 
 @media screen and (min-width: 601px) {
   .post{
-    width: 300px;
-    height: 300px;
-    border: solid 5px #32c3ff;;
+    
+    border: solid 5px rgb(93, 167, 125);
     }
 }
 
+.Login{
+  font-family: fantasy;
+}
+
 @media screen and (max-width: 600px) {
-  .profile-images img{
+  .home-pics{
     width: 50px;
-    height: 50px;
+    display: flex;
+    align-content: flex-start;
+    }
+}
+
+@media screen and (min-width: 601px) {
+  .home-pics{
+    width: 100px;
     display: inline-flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    text-align: left;
+   justify-content: space-around;
+    
     }
 }
 

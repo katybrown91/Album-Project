@@ -146,7 +146,20 @@ export default {
       .then(res => res.data)
       .catch(errHandler)    
   },
+  deleteAlbum(id){
+    return service
+      .delete(`/delete/${id}`)
+      .then(res => res.data)
+      .catch(errHandler)     
+  },
 
+  
+  deletePicture(id){
+    return service
+      .delete(`/deletePic/${id}`)
+      .then(res => res.data)
+      .catch(errHandler)     
+  }
   // addPicToAlbum(infoToAdd) {
   //   console.log("the album id --------- ", infoToAdd)
   //   return service
