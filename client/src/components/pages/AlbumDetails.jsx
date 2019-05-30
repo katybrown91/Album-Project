@@ -23,36 +23,16 @@ export default class AlbumDetails extends Component {
 
 
   componentDidMount(){
-    // console.log("thi sis the this in album details", this)
-    // console.log("the is the id of the album for the details ---------- ", this.props.match.params.id)
+
 
     api.getMyAlbumDetails(this.props.match.params.id).then(albumDetails=>{
-      // console.log("Get from backend")
-      // console.log("show the details",albumDetails)
 
       this.setState({
         album: albumDetails.AlbumDetails,
         // picture: albumDetails.albumDetails.pictures
       }) 
-      // console.log("the album details %%%%%%%%%%%%%%%%%%%%%%%%%%% ", albumDetails)      
+           
     })
-
-    // api.getPics().then(pictures=>{
-
-    //   console.log(pictures[0].imageURL)
-    //   console.log(pictures[0].description)
-
-    //   // loop thru pictures array and take picture[i].imageURL and 
-    //   // picture[i].description
-    //   console.log("show me the state <<<<<<<<<< ", this.state);
-    //   if(pictures) {
-    //     this.setState({
-    //       pictures: pictures
-    //     })
-    //   }
-
-
-    // })
   }
 
 
@@ -64,7 +44,6 @@ export default class AlbumDetails extends Component {
 
 
   handleFileChange(e) {
-    //console.log("the file target ======= ", e.target)
     this.setState({
       [e.target.name]: e.target.files[0]
     })
@@ -72,7 +51,6 @@ export default class AlbumDetails extends Component {
 
 
   handleChange(e) {
-    //console.log("the handle change ------- ", e.target)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -85,49 +63,31 @@ export default class AlbumDetails extends Component {
       description: this.state.description,
       albumId: this.state.album._id
     }
-    //console.log("this is the data being passed -------- ", data);
     // Reuse of the method "addPicture" from the file '../api'
     api.addPicture(this.state.file, data).then(result=>{
-      // console.log("the fruits of our labor ---------- ", result)
       this.setState({
         album: result,
         file: '',
         description: ''
       })
-      // console.log("show me the state ^^^^^^^^^^^^^^^^^^^^^^^ ", this.state)
     })
     // if(this.state.album) {
     //   api.getPics(this.state.album._id).then(pictures=>{
   
-    //     console.log(pictures[0].imageURL)
-    //     console.log(pictures[0].description)
-  
-    //     // loop thru pictures array and take picture[i].imageURL and 
-    //     // picture[i].description
-    //     console.log("what do i get from the pics ><>><><><><><><><><><><><<<<<><><><> ", pictures);
-    //     // this.setState({
-    //     //   pictures: pictures
-    //     // })
-  
-  
-    //   })
-    // }
+   
 
   }
 
   showPictures() {
-    // console.log("test ...............")
     console.log("................", this.state)
     if(this.state.album) {
       if(this.state.album.pictures.length > 0) {
-        // console.log("state pictures ---------------->>>> ", this.state.pictures);
         return this.state.album.pictures.map((picture, i) => {
           console.log("the picture info ------ ", picture)
           if(picture !== null) {
-            // console.log("the states picture images >>>>>>>>>>>>>>>>>> ", picture)
             return (
               <div className="post">
-                <img key={i} src={picture.imageURL} alt="your pic"/>
+                <img key={i} src={picture.imageURL} alt="your pic" width="100%"/>
                 <h4>{picture.description}</h4>
                 <button type="button"
         onClick={() =>
@@ -137,17 +97,12 @@ export default class AlbumDetails extends Component {
           }
         })
       } else {
-        // console.log("the else condition ============ ", this.state);
         
         return (
           <h3>Nothing to show</h3>
         )
       }
     }
-    // console.log("this is the state ------- ", this.state);
-    // this.setState({
-      
-    // })
   }
 
   removePicture(picture, index) {
@@ -167,13 +122,11 @@ export default class AlbumDetails extends Component {
   
   
   render(){
-    // console.log(this.state)
-    // console.log("Test")
     return(
       <div>
          <h4>{this.state.title}</h4> 
 
-      {this.showAlbumDetails}
+      
       
       <form onSubmit={(e)=>this.handleSubmit(e)}>
           <input type="file" name="file" onChange={(e)=>this.handleFileChange(e)} /> <br/>
@@ -182,11 +135,9 @@ export default class AlbumDetails extends Component {
         </form>
       
       <div className= "album-pics">
+      {this.showAlbumDetails}
         {this.showPictures()}
 
-       {/*} <button type="button"
-        onClick={() => 
-        this.onRemoveItem(this.state.album._id)}>Delete</button> */}
         </div> 
       
       </div>

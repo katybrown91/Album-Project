@@ -110,21 +110,44 @@ body {
 
 @media screen and (max-width: 600px) {
   .home-pics{
-    width: 50px;
+    width: 90%;
     display: flex;
-    align-content: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid 5px rgb(93, 167, 125);
     }
 }
 
 @media screen and (min-width: 601px) {
   .home-pics{
-    width: 100px;
-    display: inline-flex;
+    width: 90%;
+    display: flex;
     flex-direction: row;
-   justify-content: space-around;
+    justify-content: space-between;
+    border: solid 5px rgb(93, 167, 125);
     
     }
 }
 
+.albums{
+  font-family: monospace;
+  font-size: 5vh;
+}
+
+button{
+  background-color: rgb(224, 188, 26); /* Green */
+  border: solid 5px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: monospace;
+}
+
+.album-pics{
+  width: 25%;
+}
 
 

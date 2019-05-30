@@ -47,7 +47,6 @@ export default class Albums extends Component {
   }
 
   makeNewAlbum = (e) => {
-    // e.preventDefault()
     let newAlbum = {title: this.state.album}
     api.saveAlbum(newAlbum).then(album=>{
       console.log(album, this)

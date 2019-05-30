@@ -39,10 +39,12 @@ export default class Albums extends Component {
     return this.state.albums.map((eachAlbum,i)=>{
       return <li key={i}> { eachAlbum.title} 
               <Link to={`albumDetails/${eachAlbum._id}`}>View Album</Link>
+          
               <button type="button"
         onClick={() => 
         // this.removeAlbum(this.state.album._id)}>Delete</button> 
         this.removeAlbum(eachAlbum, i)}>Delete</button> 
+     
 
             </li>
     })
@@ -91,14 +93,11 @@ export default class Albums extends Component {
   render() {
     return (
       <div className="Albums">
-        <div className= "album-pics">
+        <div className= "albums">
         {this.state.album}
         
         {this.showAlbums()}
 
-        {/* <button type="button"
-        onClick={() => 
-        this.onRemoveItem(this.state.album._id)}>Delete</button>  */}
         </div>
         
       </div>
