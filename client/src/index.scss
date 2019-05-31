@@ -76,18 +76,21 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .post{
+  .album-pics{
     width: 50%;
-    border: solid 5px rgb(93, 167, 125);
+    border: solid 50% rgb(93, 167, 125);
+    display: flex;
+    flex-direction: row;
     }
 }
 
-@media screen and (min-width: 601px) {
-  .post{
-    width:50%;
+.post{
+    width: 50%;
     border: solid 5px rgb(93, 167, 125);
     }
-}
+
+
+
 
 .Login{
   font-family: fantasy;
@@ -122,14 +125,14 @@ body {
 }
 
 button{
-  background-color: rgb(224, 188, 26); /* Green */
+  background-color: rgb(224, 188, 26);
   border: solid 5px;
   color: white;
-  padding: 15px 32px;
+  padding: 3vh 7vh;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 5vh;
   font-family: monospace;
 }
 
