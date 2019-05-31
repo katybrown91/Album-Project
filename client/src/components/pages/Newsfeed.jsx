@@ -38,7 +38,9 @@ export default class Albums extends Component {
   showAlbums = () => {
     return this.state.albums.map((eachAlbum,i)=>{
       return <li key={i}> { eachAlbum.title} 
+      <br></br>
               <Link to={`albumDetails/${eachAlbum._id}`}>View Album</Link>
+              <br></br>
           
               <button type="button"
         onClick={() => 
